@@ -13,40 +13,45 @@ public class HW06_4110056028_2 extends MedianOfArrays {
         for (int i = 0; i < arrays.length; i++) {
             length += arrays[i].length;
         }
-        int[] num = new int[length];
-        int count = 0;
-        for (int i = 0; i < arrays.length; i++) {
-            for (int j = 0; j < arrays[i].length; j++) {
-                num[count++] = arrays[i][j];
-            }
-        }
+        int[] point = new int[arrays.length];
         if (length % 2 == 0) {
-            selectionSort(num, length / 2);
-            for (int i : num) {
-                System.out.print(i + " ");
-            }
-            return (num[num.length / 2 - 1] + num[num.length / 2]) / 2;
-        } else {
-            selectionSort(num, (length - 1) / 2);
-            for (int i : num) {
-                System.out.print(i + " ");
-            }
-            return num[(length - 1) / 2];
-        }
-    }
-
-    private void selectionSort(int[] arr, int end) {
-        for (int i = 0; i <= end; i++) {
-            int index = i;
-            for (int j = i + 1; j < arr.length; j++) {
-                if (arr[j] < arr[index]) {
-                    index = j;
+            int[] num = new int[(length / 2) + 1];
+            int count = 0;
+            for (int i = 0; i < num.length; i++) {
+                int index = 0;
+                int min = 99999999;
+                for (int j = 0; j < arrays.length; j++) {
+                    if (point[j] == arrays[j].length) {
+                        continue;
+                    }
+                    if (arrays[j][point[j]] < min) {
+                        min = arrays[j][point[j]];
+                        index = j;
+                    }
                 }
+                num[count++] = arrays[index][point[index]];
+                point[index]++;
             }
-            int smallerNumber = arr[index];
-            arr[index] = arr[i];
-            arr[i] = smallerNumber;
+            return (num[num.length - 1] + num[num.length - 2]) / 2.0;
+        } else {
+            int[] num = new int[(length + 1) / 2];
+            int count = 0;
+            for (int i = 0; i < num.length; i++) {
+                int index = 0;
+                int min = 99999999;
+                for (int j = 0; j < arrays.length; j++) {
+                    if (point[j] == arrays[j].length) {
+                        continue;
+                    }
+                    if (arrays[j][point[j]] < min) {
+                        min = arrays[j][point[j]];
+                        index = j;
+                    }
+                }
+                num[count++] = arrays[index][point[index]];
+                point[index]++;
+            }
+            return num[num.length - 1];
         }
     }
-
 }
