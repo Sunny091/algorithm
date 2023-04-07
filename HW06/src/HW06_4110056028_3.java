@@ -19,7 +19,7 @@ public class HW06_4110056028_3 extends MedianOfArrays {
         }
         quickSort(temp, 0, temp.length - 1);
         if (temp.length % 2 == 0) {
-            return (temp[temp.length / 2 - 1] + temp[temp.length / 2]) / 2;
+            return (temp[temp.length / 2 - 1] + temp[temp.length / 2]) / 2.0;
         } else {
             return temp[(temp.length - 1) / 2];
         }
