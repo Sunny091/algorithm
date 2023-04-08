@@ -15,6 +15,7 @@ public class HW06_4110056028_3 extends MedianOfArrays {
         for (int i = 0; i < arrays.length; i++) {
             k += arrays[i].length;
         }
+        k /= 2;
         m = arrays.length;
         n = arrays[0].length; // For general, the matrix need not be a square
         int left = arrays[0][0], right = arrays[m - 1][n - 1], ans = -1;
