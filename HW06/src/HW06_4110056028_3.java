@@ -7,47 +7,35 @@ public class HW06_4110056028_3 extends MedianOfArrays {
         System.out.println(test.find_median(b));
     }
 
+    int m, n;
+
     @Override
     public double find_median(int[][] arrays) {
-        int[] temp = new int[arrays.length];
+        int k = 0;
         for (int i = 0; i < arrays.length; i++) {
-            if (arrays[i].length % 2 == 0) {
-                temp[i] = arrays[i][arrays[i].length / 2 - 1] + arrays[i][arrays[i].length / 2] / 2;
-            } else {
-                temp[i] = arrays[i][(arrays[i].length - 1) / 2];
-            }
+            k += arrays[i].length;
         }
-        quickSort(temp, 0, temp.length - 1);
-        if (temp.length % 2 == 0) {
-            return (temp[temp.length / 2 - 1] + temp[temp.length / 2]) / 2.0;
-        } else {
-            return temp[(temp.length - 1) / 2];
+        m = arrays.length;
+        n = arrays[0].length; // For general, the matrix need not be a square
+        int left = arrays[0][0], right = arrays[m - 1][n - 1], ans = -1;
+        while (left <= right) {
+            int mid = (left + right) >> 1;
+            if (countLessOrEqual(arrays, mid) >= k) {
+                ans = mid;
+                right = mid - 1; // try to looking for a smaller value in the left side
+            } else
+                left = mid + 1; // try to looking for a bigger value in the right side
         }
+        return ans;
     }
 
-    private void quickSort(int arr[], int begin, int end) {
-        if (begin < end) {
-            int partitionIndex = partition(arr, begin, end);
-            quickSort(arr, begin, partitionIndex - 1);
-            quickSort(arr, partitionIndex + 1, end);
+    int countLessOrEqual(int[][] arrays, int x) {
+        int cnt = 0, c = n - 1; // start with the rightmost column
+        for (int r = 0; r < m; ++r) {
+            while (c >= 0 && arrays[r][c] > x)
+                --c; // decrease column until matrix[r][c] <= x
+            cnt += (c + 1);
         }
-    }
-
-    private int partition(int arr[], int begin, int end) {
-        int pivot = arr[end];
-        int i = (begin - 1);
-        for (int j = begin; j < end; j++) {
-            if (arr[j] <= pivot) {
-                i++;
-
-                int swapTemp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = swapTemp;
-            }
-        }
-        int swapTemp = arr[i + 1];
-        arr[i + 1] = arr[end];
-        arr[end] = swapTemp;
-        return i + 1;
+        return cnt;
     }
 }
