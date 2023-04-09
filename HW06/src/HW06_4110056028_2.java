@@ -9,17 +9,17 @@ public class HW06_4110056028_2 extends MedianOfArrays {
 
     @Override
     public double find_median(int[][] arrays) {
-        int length = 0;
-        for (int i = 0; i < arrays.length; i++) {
+        int length = 0, n = arrays.length;
+        for (int i = 0; i < n; i++) {
             length += arrays[i].length;
         }
-        int[] point = new int[arrays.length];
+        int[] point = new int[n];
         if (length % 2 == 0) {
             int[] num = new int[(length / 2) + 1];
             int count = 0;
-            for (int i = 0; i < num.length; i++) {
+            for (int i = 0; i < (length / 2) + 1; i++) {
                 int index = 0;
-                int min = 99999999;
+                int min = Integer.MAX_VALUE;
                 for (int j = 0; j < arrays.length; j++) {
                     if (point[j] == arrays[j].length) {
                         continue;
@@ -32,14 +32,14 @@ public class HW06_4110056028_2 extends MedianOfArrays {
                 num[count++] = arrays[index][point[index]];
                 point[index]++;
             }
-            return (num[num.length - 1] + num[num.length - 2]) / 2.0;
+            return (num[(length / 2)] + num[(length / 2) - 1]) / 2.0;
         } else {
             int[] num = new int[(length + 1) / 2];
             int count = 0;
-            for (int i = 0; i < num.length; i++) {
+            for (int i = 0; i < (length + 1) / 2; i++) {
                 int index = 0;
-                int min = 99999999;
-                for (int j = 0; j < arrays.length; j++) {
+                int min = Integer.MAX_VALUE;
+                for (int j = 0; j < n; j++) {
                     if (point[j] == arrays[j].length) {
                         continue;
                     }
@@ -51,7 +51,7 @@ public class HW06_4110056028_2 extends MedianOfArrays {
                 num[count++] = arrays[index][point[index]];
                 point[index]++;
             }
-            return num[num.length - 1];
+            return num[(length + 1) / 2 - 1];
         }
     }
 }
