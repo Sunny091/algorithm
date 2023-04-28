@@ -1,11 +1,4 @@
 public class HW07_4110056028_1 extends LLK {
-    public static void main(String[] args) throws Exception {
-        int[][] star1 = { { 1, 2 }, { 1, 3 }, { 1, 4 } };
-        int[][] star2 = { { 0, 0 }, { 1, 0 }, { 1, 1 }, { 0, 1 } };
-        HW07_4110056028_1 test = new HW07_4110056028_1();
-        System.out.println(test.checkLLK(star1));
-        System.out.println(test.checkLLK(star2));
-    }
 
     @Override
     public boolean checkLLK(int[][] array) {

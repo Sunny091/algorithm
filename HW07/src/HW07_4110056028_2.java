@@ -1,11 +1,4 @@
 public class HW07_4110056028_2 extends LLK {
-    public static void main(String[] args) throws Exception {
-        int[][] star1 = { { 1, 2 }, { 1, 3 }, { 1, 4 } };
-        int[][] star2 = { { 0, 0 }, { 1, 0 }, { 1, 1 }, { 0, 1 } };
-        HW07_4110056028_2 test = new HW07_4110056028_2();
-        System.out.println(test.checkLLK(star1));
-        System.out.println(test.checkLLK(star2));
-    }
 
     @Override
     public boolean checkLLK(int[][] array) {
@@ -30,8 +23,8 @@ public class HW07_4110056028_2 extends LLK {
 
             // 檢查斜率是否相等
             if (deltaX1 * deltaY2 == deltaX2 * deltaY1) {
-                return true;
             }
+            return true;
         }
 
         return false;
