@@ -3,28 +3,64 @@ public class HW07_4110056028_1 extends LLK {
     @Override
     public boolean checkLLK(int[][] array) {
         if (array.length < 3) {
-            return false;
+            return true; // 如果點的數量小於3，則一定在同一條線上
         }
 
-        for (int i = 0; i < array.length - 2; i++) {
-            int[] star1 = array[i];
+        sortPoints(array, 0, array.length - 1); // 對點進行排序
 
-            for (int j = i + 1; j < array.length - 1; j++) {
-                int[] star2 = array[j];
-
-                for (int k = j + 1; k < array.length; k++) {
-                    int[] star3 = array[k];
-
-                    // 計算三點之間的斜率
-                    // 若斜率相等，表示三顆星星在同一條線上
-                    if ((star2[1] - star1[1]) * (star3[0] - star1[0]) == (star3[1] - star1[1])
-                            * (star2[0] - star1[0])) {
-                        return true;
-                    }
-                }
+        double slope = getSlope(array[0], array[1]);
+        for (int i = 2; i < array.length; i++) {
+            double currSlope = getSlope(array[0], array[i]);
+            if (currSlope != slope) {
+                return false;
             }
         }
 
-        return false;
+        return true;
+    }
+
+    public static void sortPoints(int[][] array, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+
+        int mid = partition(array, left, right);
+        sortPoints(array, left, mid - 1);
+        sortPoints(array, mid + 1, right);
+    }
+
+    public static int partition(int[][] array, int left, int right) {
+        int[] pivot = array[right];
+        int i = left - 1;
+        for (int j = left; j < right; j++) {
+            if (comparePoints(array[j], pivot) <= 0) {
+                i++;
+                swapPoints(array, i, j);
+            }
+        }
+        swapPoints(array, i + 1, right);
+        return i + 1;
+    }
+
+    public static int comparePoints(int[] p1, int[] p2) {
+        if (p1[0] != p2[0]) {
+            return p1[0] - p2[0];
+        } else {
+            return p1[1] - p2[1];
+        }
+    }
+
+    public static void swapPoints(int[][] array, int i, int j) {
+        int[] temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    public static double getSlope(int[] p1, int[] p2) {
+        if (p1[0] == p2[0]) {
+            return Double.POSITIVE_INFINITY;
+        } else {
+            return (double) (p2[1] - p1[1]) / (double) (p2[0] - p1[0]);
+        }
     }
 }
