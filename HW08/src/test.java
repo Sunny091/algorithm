@@ -5,7 +5,7 @@ public class test {
 
     @Test
     void MaxLandArea() {
-        HW08_4110056028_2 test = new HW08_4110056028_2();
+        HW08_4110056028_1 test = new HW08_4110056028_1();
         int[][] start1 = { { 0, 1, 1 },
                 { 1, 0, 1 },
                 { 0, 1, 1 } };
