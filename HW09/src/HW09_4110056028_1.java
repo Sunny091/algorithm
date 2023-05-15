@@ -15,5 +15,6 @@ public class HW09_4110056028_1 extends LSD {
             arrayLists[array[i][0]].add(array[i][1]);
             arrayLists[array[i][1]].add(array[i][0]);
         }
+        
     }
 }
