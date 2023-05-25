@@ -4,6 +4,8 @@ import java.util.Stack;
 
 public class HW09_4110056028_1 extends LSD {
 
+    private int distance;
+
     @Override
     public int Distance(int[][] array) {
         ArrayList<node> graph = new ArrayList<node>();
@@ -30,12 +32,30 @@ public class HW09_4110056028_1 extends LSD {
                 graph.add(e2);
             }
         }
-        
+        node temp = bfs(graph.get(0), graph);
+        for (node node : graph) {
+            node.hasVisited = false;
+        }
+        temp = bfs(temp, graph);
+        return distance;
+    }
+
+    private node bfs(node start, ArrayList<node> graph) {
+        int stackIndex = 0;
+        Stack<node> stack = new Stack<node>();
+        start.hasVisited = true;
+        stack.add(start);
+        while (stackIndex < stack.size() - 1) {
+            for (node node : stack) {
+                for (int adj : node.adj) {
+                    stack.push(adj);
+                }
+            }
+        }
     }
 
     class node {
-        private ArrayList<Integer> adj;
-        private int key;
+        private ArrayList<Integer> adj; 
         private boolean hasVisited;
 
         public node(int key) {
